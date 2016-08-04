@@ -1,0 +1,10 @@
+Die Kata enthielt den Fehler, dass der erste Test mit einer Zeilenlänge von 8 
+definiert war, aber das Ergebnis auf Basis einer Zeilenlänge 9 erstellt war,
+dementsprechend haben wir den Test angepasst.
+
+Wir sind zuerst komplett nur über Papier vorgangenen und erst als wir glaubten,
+dass wie alle Funktionen implementieren können, haben wir uns an den Rechner 
+gesetzt.
+Das hat gut geklappt, aber bei den Funktionen "WorteInZeilen" und " WorteNormieren"
+hatten wir uns wohl überschätzt und kriegten die Lösung doch nicht so schnell hin.
+

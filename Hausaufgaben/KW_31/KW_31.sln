@@ -1,9 +1,35 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbrechen", "Umbrechen\Umbrechen.csproj", "{C915A75E-1395-4609-A675-96F3944319E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbrechen.Tests", "Umbrechen.Tests\Umbrechen.Tests.csproj", "{C3FF969B-EC94-46B8-AFC8-E2315CFED628}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wie vorgingen", "Wie vorgingen", "{4CAF993B-9F13-40C8-9C7E-9FB83569502D}"
+	ProjectSection(SolutionItems) = preProject
+		20160804_094116_resized.jpg = 20160804_094116_resized.jpg
+		20160804_094141_resized.jpg = 20160804_094141_resized.jpg
+		20160804_094154_resized.jpg = 20160804_094154_resized.jpg
+		Anmerkungen.txt = Anmerkungen.txt
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C915A75E-1395-4609-A675-96F3944319E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C915A75E-1395-4609-A675-96F3944319E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C915A75E-1395-4609-A675-96F3944319E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C915A75E-1395-4609-A675-96F3944319E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3FF969B-EC94-46B8-AFC8-E2315CFED628}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3FF969B-EC94-46B8-AFC8-E2315CFED628}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3FF969B-EC94-46B8-AFC8-E2315CFED628}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3FF969B-EC94-46B8-AFC8-E2315CFED628}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
