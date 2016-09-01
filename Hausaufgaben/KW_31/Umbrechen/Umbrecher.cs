@@ -17,21 +17,20 @@ namespace Umbrechen
             return text.Split(new[] {" ", "\n"}, StringSplitOptions.RemoveEmptyEntries);
         }
 
-        public IEnumerable<string> WorteNormieren(IEnumerable<string> worte, int maxZeichenlänge)
+        public string WorteZusammenfügen(IEnumerable<string> worte, int maxZeichenlänge)
         {
-            List<string> result = new List<string>();
-            foreach (var wort in worte)
-            {
-                if (wort.Length <= maxZeichenlänge) result.Add(wort);
-                else result.AddRange(TeileInNormierteWorte(maxZeichenlänge, wort));
-            }
-            return result;
+            var normiert = WorteNormieren(worte, maxZeichenlänge);
+            var umgebrochen = WorteInZeilen(normiert, maxZeichenlänge);
+            return ZeilenInText(umgebrochen);
         }
 
-        private static IEnumerable<string> TeileInNormierteWorte(int maxZeichenlänge, string wort)
+        public IEnumerable<string> WorteNormieren(IEnumerable<string> worte, int maxZeichenlänge)
         {
-            for (int i = 0; i < wort.Length; i += maxZeichenlänge)
-                yield return wort.Substring(i, Math.Min(maxZeichenlänge, wort.Length - i));
+            foreach (var wort in worte)
+            {
+                for (int i = 0; i < wort.Length; i += maxZeichenlänge)
+                    yield return wort.Substring(i, Math.Min(maxZeichenlänge, wort.Length - i));
+            }
         }
 
         public IEnumerable<string> WorteInZeilen(IEnumerable<string> worte, int maxZeichenlänge)
@@ -57,16 +56,11 @@ namespace Umbrechen
                 yield return zeile;
         }
 
-        public string ZeilenInText(IEnumerable<string> worte)
+        public string ZeilenInText(IEnumerable<string> zeilen)
         {
-            return string.Join("\n", worte);
+            return string.Join("\n", zeilen);
         }
 
-        public string WorteZusammenfügen(IEnumerable<string> worte, int maxZeichenlänge)
-        {
-            var normiert = WorteNormieren(worte, maxZeichenlänge);
-            var umgebrochen = WorteInZeilen(normiert, maxZeichenlänge);
-            return ZeilenInText(umgebrochen);
-        }
+
     }
 }
