@@ -41,7 +41,7 @@ namespace KataLoc.Tests
         {
             var loc = new Loc();
             var lines = new[] { "var a = 2;  /* Ko", "12345", "ar*/ var g = 2;" };
-            CollectionAssert.AreEqual(new[] { "var a = 2;  /* Ko", "ar*/ var g = 2;" }, loc.RemoveCommentBlocks(lines).ToArray());
+            CollectionAssert.AreEqual(new[] { "var a = 2;  /* Ko", "ar*/ var g = 2;" }, BlockComments.RemoveCommentBlocks(lines).ToArray());
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace KataLoc.Tests
         {
             var loc = new Loc();
             var lines = new[] { "var a = 2;  /* Ko", "12345", "ar*/" };
-            CollectionAssert.AreEqual(new[] { "var a = 2;  /* Ko" }, loc.RemoveCommentBlocks(lines).ToArray());
+            CollectionAssert.AreEqual(new[] { "var a = 2;  /* Ko" }, BlockComments.RemoveCommentBlocks(lines).ToArray());
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace KataLoc.Tests
         {
             var loc = new Loc();
             var lines = new[] { "/* Ko", "12345", "ar*/" };
-            CollectionAssert.AreEqual(new string[0], loc.RemoveCommentBlocks(lines).ToArray());
+            CollectionAssert.AreEqual(new string[0], BlockComments.RemoveCommentBlocks(lines).ToArray());
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace KataLoc.Tests
         {
             var loc = new Loc();
             var lines = new[] { "/* Ko", "12345", "ar*/ var g = 2;" };
-            CollectionAssert.AreEqual(new[] { "ar*/ var g = 2;" }, loc.RemoveCommentBlocks(lines).ToArray());
+            CollectionAssert.AreEqual(new[] { "ar*/ var g = 2;" }, BlockComments.RemoveCommentBlocks(lines).ToArray());
         }
 
         [TestMethod]
@@ -73,21 +73,21 @@ namespace KataLoc.Tests
         {
             var loc = new Loc();
             var lines = new[] { " Kommentar */ var g = 2;" };
-            CollectionAssert.AreEqual(new[] { " Kommentar */ var g = 2;" }, loc.RemoveCommentBlocks(lines).ToArray());
+            CollectionAssert.AreEqual(new[] { " Kommentar */ var g = 2;" }, BlockComments.RemoveCommentBlocks(lines).ToArray());
         }
 
         [TestMethod]
         public void RemoveCommentInLineTest_0()
         {
             var loc = new Loc();
-            Assert.AreEqual(" var g = 2; ", loc.RemoveCommentInLine("/* Kommentar */ var g = 2; /* Kommentar */"));
+            Assert.AreEqual(" var g = 2; ", BlockComments.RemoveBlockCommentsInLine("/* Kommentar */ var g = 2; /* Kommentar */"));
         }
 
         [TestMethod]
         public void RemoveCommentInLineTest_1()
         {
             var loc = new Loc();
-            Assert.AreEqual(" var g = 2;  /* Teil Kommentar", loc.RemoveCommentInLine("/* Kommentar */ var g = 2; /* Kommentar */ /* Teil Kommentar"));
+            Assert.AreEqual(" var g = 2;  /* Teil Kommentar", BlockComments.RemoveBlockCommentsInLine("/* Kommentar */ var g = 2; /* Kommentar */ /* Teil Kommentar"));
         }
 
     }

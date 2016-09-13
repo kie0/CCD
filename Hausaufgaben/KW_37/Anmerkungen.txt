@@ -1,0 +1,15 @@
+
+
+Alternativ wäre es besser gewesen, dass wir dass Erstellen 
+der einzelnen Zeilen vom Tannenbaum getrennt hätten.
+
+var spitze = ...
+var krone = ...
+var stamm = ...
+
+return spitze + krone + stamm // linq concat
+
+
+Woran kann man früher erkennen welcher Lösungsansatz besser ist?
+
+Besser im Sinne der Erweiterbarkeit?

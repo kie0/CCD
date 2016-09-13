@@ -10,11 +10,11 @@ namespace KataLoc
         {
             var lines = GetLines(csSource);
 
-            var removedCommentsInLines = RemoveCommentLines(lines);
+            var removedCommentsInLines = FilterNonCodeLines(lines);
 
-            var finalLines = RemoveCommentBlocks(removedCommentsInLines);
+            var finalLines = BlockComments.RemoveCommentBlocks(removedCommentsInLines);
 
-            return finalLines.Count();
+            return finalLines.Count();  
         }
 
         public IEnumerable<string> GetLines(string source)
@@ -22,51 +22,26 @@ namespace KataLoc
             return source.Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries);
         }
         
-        public IEnumerable<string> RemoveCommentLines(IEnumerable<string> lines)
+        public IEnumerable<string> FilterNonCodeLines(IEnumerable<string> lines)
         {
-            return lines.Select(RemoveCommentInLine).Where(line => !line.StartsWith("//") && !string.IsNullOrWhiteSpace(line));
+            lines = RemoveBlockComments(lines);
+            lines = FilterSimpleComments(lines);
+            return FilterEmptyLines(lines);
         }
 
-        public string RemoveCommentInLine(string line)
+        private IEnumerable<string> FilterSimpleComments(IEnumerable<string> lines)
         {
-            var startComment = line.IndexOf("/*", StringComparison.InvariantCultureIgnoreCase);
-            var endComment = line.IndexOf("*/", StringComparison.InvariantCultureIgnoreCase);
-            if ((startComment < endComment) && (startComment != -1) && (endComment != -1))
-                return RemoveCommentInLine(line.Remove(startComment, endComment - startComment + 2));
-            return line;
+            return lines.Where(line => !line.Trim().StartsWith("//"));
         }
 
-        public IEnumerable<string> RemoveCommentBlocks(IEnumerable<string> linesWithContent)
+        private IEnumerable<string> RemoveBlockComments(IEnumerable<string> lines)
         {
-            var inComment = false;
+            return lines.Select(BlockComments.RemoveBlockCommentsInLine);
+        }
 
-            foreach (var line in linesWithContent)
-            {
-                if (inComment)
-                {
-                    int index = line.IndexOf("*/", StringComparison.InvariantCultureIgnoreCase);
-                    if (index >= 0)
-                    {
-                        if (index + 1 != line.Length - 1) // nicht letzte Zeichen
-                            yield return line;
-                        inComment = false;
-                    }
-                }
-                else
-                {
-                    int index = line.IndexOf("/*", StringComparison.InvariantCultureIgnoreCase);
-                    if (index >= 0)
-                    {
-                        if (index > 0) // nicht erstes Zeichen
-                            yield return line;
-                        inComment = true;
-                    }
-                    else
-                    {
-                        yield return line;
-                    }
-                }
-            }
+        private IEnumerable<string> FilterEmptyLines(IEnumerable<string> lines)
+        {
+            return lines.Where(line => !string.IsNullOrWhiteSpace(line));
         }
     }
 }
