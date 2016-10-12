@@ -28,7 +28,7 @@ namespace WordCount
 
         private static string[] SplitWords(string input)
         {
-            var words = input.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+            var words = input.Split(new[] {' ','\n','\r'}, StringSplitOptions.RemoveEmptyEntries);
             return words;
         }
     }

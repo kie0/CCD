@@ -8,22 +8,39 @@ namespace WordCount
 {
     public class App
     {
-        private IIo io;
-        
-        public App(IIo io)
+        private readonly Cli cli;
+        private readonly FileSystem fs;
+        private readonly Console shell;
+
+        public App(Cli cli, FileSystem fs, Console shell)
         {
-            this.io = io;
+            this.cli = cli;
+            this.fs = fs;
+            this.shell = shell;
         }
 
         public void Run()
         {
-            var text = io.ReadText();
-            var stoppedWords = io.ReadStoppedWords();
+            var text = ReadText();
+            var stoppedWords = fs.ReadStoppedWords();
 
             var counter = new Counter();
 
             var count = counter.CountWords(text,stoppedWords);
-            io.WriteText(count);
+            shell.Write(count);
+        }
+
+        private string ReadText()
+        {
+            string result=null;
+            cli.GetFileName(
+                path => {
+                            result = fs.Read(path);
+                },
+                () => {
+                          result = shell.Read();
+                });
+            return result;
         }
     }
 }

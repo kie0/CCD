@@ -10,10 +10,9 @@ namespace WordCountTests
         [TestMethod]
         public void TestMethod1()
         {
-            var io = new TestIo(new [] {"a"},"a b c" );
-            var app = new App(io);
-            app.Run();
-            Assert.AreEqual("2", io.Output);
+            //var cli = new Moq.Mock<Cli>().Setup(cli1 => )
+
+            ////new App()
         }
 
         [TestMethod]

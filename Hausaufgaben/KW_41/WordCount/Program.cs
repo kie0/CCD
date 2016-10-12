@@ -8,13 +8,13 @@ namespace WordCount
 {
     class Program
     {
-
-
         static void Main(string[] args)
         {
-
-            var app = new App(new Cli(args), new FileSystem(), new Console());
-            app.Run();
+            new App(
+                new Console(), 
+                new FileSystem(), 
+                new CLI()
+                ).Run();
         }
     }
 }
