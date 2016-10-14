@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6E8FD52-74B8-4F76-A733-D43BA0ADD00E}"
 	ProjectSection(SolutionItems) = preProject
 		Anmerkungen.txt = Anmerkungen.txt
+		Flow.jpg = Flow.jpg
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordCount.Tests", "WordCount.Tests\WordCount.Tests.csproj", "{132DE7AA-2678-4310-9416-5B6E92BBF34A}"

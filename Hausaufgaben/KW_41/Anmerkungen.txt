@@ -1,4 +1,4 @@
 Wir haben als Grundlage die Version aus dem Count Word Kata III genommen.
-Aus diesem Grund haben wir auch nicht beim Diagramm nur die innereren Teile 
+Aus diesem Grund haben wir auch beim Diagramm nur die innereren Teile 
 neu designed. 
 
