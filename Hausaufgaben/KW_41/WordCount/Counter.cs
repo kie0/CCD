@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -6,16 +7,37 @@ namespace WordCount
 {
     public class Counter
     {
-        public ResultOfCounts Count(string text, string[] stopwords)
+        public void Count(string text, string[] stopwords, bool withIndex, 
+            Action<ResultOfCounts> continueWithCounts,
+            Action<string[]> continueWithIndex)
         {
             var words = SplitWords(text);
 
             var filtered = Filter(words, stopwords);
 
             var count = CountAll(filtered);
-            var uniqueCount = CountUnique(filtered);
+            var uniqueWords = DistinctList(filtered);
+            var uniqueCount = CountAll(uniqueWords);
 
-            return new ResultOfCounts(count, uniqueCount); 
+            continueWithCounts(new ResultOfCounts(count, uniqueCount));
+
+            CreateIndex(withIndex,uniqueWords, continueWithIndex);
+
+        }
+
+        private void CreateIndex(bool withIndex, IEnumerable<string> uniqueWords, 
+            Action<string[]> continueWithIndex)
+        {
+            if (withIndex)
+            {
+                var index = uniqueWords.OrderBy(s => s,StringComparer.InvariantCultureIgnoreCase).ToArray();
+                continueWithIndex(index);
+            }
+        }
+
+        private static IEnumerable<string> DistinctList(string[] filtered)
+        {
+            return filtered.Distinct(StringComparer.InvariantCultureIgnoreCase);
         }
 
         private string[] SplitWords(string text)
@@ -30,14 +52,10 @@ namespace WordCount
             return filtered.ToArray();
         }
 
-        private int CountAll(string[] words)
+        private int CountAll(IEnumerable<string> words)
         {
             return words.Count();
         }
 
-        private int CountUnique(string[] words)
-        {
-            return words.Distinct().Count();
-        }
     }
 }

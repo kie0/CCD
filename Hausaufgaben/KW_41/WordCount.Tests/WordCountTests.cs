@@ -7,7 +7,7 @@ namespace WordCount.Tests
     public class WordCountTests
     {
         [TestMethod()] 
-        public void CountWords()
+        public void KataCountIV()
         {
             var console = new ConsoleMock("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.");
             var fileSystemMock = new FileSystemMock(
@@ -19,6 +19,12 @@ namespace WordCount.Tests
 
             Assert.AreEqual(9,console.WriteResultOfCounts.Count);
             Assert.AreEqual(7,console.WriteResultOfCounts.UniqueCount);
+        }
+
+        [TestMethod]
+        public void KataCountVII()
+        {
+            
         }
     }
 }

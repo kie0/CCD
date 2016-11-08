@@ -9,13 +9,15 @@ namespace WordCount.Tests
     class CommandLineMock:ICommandLineInterface
     {
         private readonly string fileName;
+        private readonly bool withIndex;
 
         /// <summary>
         /// Initialisiert eine neue Instanz der <see cref="T:System.Object"/>-Klasse.
         /// </summary>
-        public CommandLineMock(string fileName)
+        public CommandLineMock(string fileName, bool withIndex=false)
         {
             this.fileName = fileName;
+            this.withIndex = withIndex;
         }
 
         public void Get(string[] args, Action<string> onFilename, Action onNoFilename)
@@ -24,6 +26,11 @@ namespace WordCount.Tests
                 onNoFilename();
             else
                 onFilename(fileName);
+        }
+
+        public bool GetIndexOption(string[] args)
+        {
+            return withIndex;
         }
     }
 }

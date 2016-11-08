@@ -6,7 +6,7 @@ namespace KataLoc
 {
     public class Loc
     {
-        public int CountLOC(string csSource)
+        public LocResult CountLOC(string csSource)
         {
             var lines = GetLines(csSource);
 
@@ -14,12 +14,14 @@ namespace KataLoc
 
             var finalLines = BlockComments.RemoveCommentBlocks(removedCommentsInLines);
 
-            return finalLines.Count();  
+            var loc = finalLines.Count();
+            var totalLines = lines.Count();
+            return new LocResult(totalLines,loc);
         }
 
         public IEnumerable<string> GetLines(string source)
         {
-            return source.Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries);
+            return source.Split(new[] {"\r\n"}, StringSplitOptions.None);
         }
         
         public IEnumerable<string> FilterNonCodeLines(IEnumerable<string> lines)

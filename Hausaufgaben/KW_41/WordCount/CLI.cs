@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Linq;
 
 namespace WordCount
 {
     public interface ICommandLineInterface
     {
         void Get(string[] args, Action<string> onFilename, Action onNoFilename);
+        bool GetIndexOption(string[] args);
     }
 
     /// <summary>
@@ -14,15 +16,22 @@ namespace WordCount
     {
         public void Get(string[] args, Action<string> onFilename, Action onNoFilename)
         {
-            if (args.Length > 0 )
+            var x = args.Where(a => !a.StartsWith("-")).ToArray();
+            if (x.Length > 0)
             {
-                onFilename(args[0]);
+                onFilename(x[0]);
             }
             else
             {
                 onNoFilename();
             }
         }
+
+        public bool GetIndexOption(string[] args)
+        {
+            return args.Contains("-index", StringComparer.InvariantCultureIgnoreCase);
+        }
+
 
 
     }

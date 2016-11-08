@@ -10,28 +10,36 @@ namespace KataLoc.Tests
         public void CountLOCTest()
         {
             var loc = new Loc();
-            Assert.AreEqual(6, loc.CountLOC("1\r\n\r\n// …\r\n2 // …\r\n/* … */\r\n/* … */ 3\r\n\r\n/*\r\n…\r\n*/\r\n4\r\n5 /* …\r\n… */ 6"));
+            var locResult = loc.CountLOC("1\r\n\r\n// …\r\n2 // …\r\n/* … */\r\n/* … */ 3\r\n\r\n/*\r\n…\r\n*/\r\n4\r\n5 /* …\r\n… */ 6");
+            Assert.AreEqual(6, locResult.LinesOfCode);
+            Assert.AreEqual(13, locResult.TotalLines);
         }
-        
+
         [TestMethod]
         public void CountLoc_1()
         {
             var loc = new Loc();
-            Assert.AreEqual(1, loc.CountLOC("a = 0; /* Kommentar */"));
+            var locResult = loc.CountLOC("a = 0; /* Kommentar */");
+            Assert.AreEqual(1, locResult.LinesOfCode);
+            Assert.AreEqual(1, locResult.TotalLines);
         }
 
         [TestMethod]
         public void CountLoc_2()
         {
             var loc = new Loc();
-            Assert.AreEqual(1, loc.CountLOC("a = 0; /* Kommentar */ b = 2;"));
+            var locResult = loc.CountLOC("a = 0; /* Kommentar */ b = 2;");
+            Assert.AreEqual(1, locResult.LinesOfCode);
+            Assert.AreEqual(1, locResult.TotalLines);
         }
 
         [TestMethod]
         public void CountLoc_3()
         {
             var loc = new Loc();
-            Assert.AreEqual(1, loc.CountLOC("/* Kommentar1 */ var a = 2;  /* Kommentar2 */"));
+            var locResult = loc.CountLOC("/* Kommentar1 */ var a = 2;  /* Kommentar2 */");
+            Assert.AreEqual(1, locResult.LinesOfCode);
+            Assert.AreEqual(1, locResult.TotalLines);
         }
 
 

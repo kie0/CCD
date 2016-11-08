@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace WordCount
 {
@@ -7,6 +8,7 @@ namespace WordCount
     {
         string Read();
         void Write(ResultOfCounts counts);
+        void Write(IEnumerable<string> index);
     }
 
     public class Console : IConsole
@@ -22,6 +24,16 @@ namespace WordCount
         public void Write(ResultOfCounts counts)
         {
             System.Console.WriteLine($"Number of words: {counts.Count}, unique: {counts.UniqueCount}");
+        }
+
+        public void Write(IEnumerable<string> index)
+        {
+            System.Console.WriteLine("Index:");
+            foreach (var entry in index)
+            {
+                System.Console.WriteLine(entry);
+            }
+
         }
     }
 }

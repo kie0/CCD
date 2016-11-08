@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Linq;
 
 namespace WordCount
 {
@@ -23,17 +24,24 @@ namespace WordCount
         {
             var text = ReadText();
             var stopwords = file.ReadStopWords();
+            var withIndex = ReadIndex();
 
             var conv = new Counter();
-            var count = conv.Count(text, stopwords);
+            conv.Count(text, stopwords,withIndex, 
+                count => console.Write(count),
+                index => console.Write(index));
 
-            console.Write(count);
+        }
+
+        private bool ReadIndex()
+        {
+            return cli.GetIndexOption(Environment.GetCommandLineArgs().Skip(1).ToArray());
         }
 
         public string ReadText()
         {
             var result = string.Empty;
-            cli.Get(Environment.GetCommandLineArgs(), 
+            cli.Get(Environment.GetCommandLineArgs().Skip(1).ToArray(), 
                 s => result = file.Read(s), 
                 () => result = console.Read());
             return result;

@@ -10,6 +10,7 @@ namespace WordCount.Tests
     {
         private readonly string read;
         private ResultOfCounts writeResultOfCounts;
+        private List<string> indexResult;
 
         /// <summary>
         /// Initialisiert eine neue Instanz der <see cref="T:System.Object"/>-Klasse.
@@ -29,6 +30,16 @@ namespace WordCount.Tests
             writeResultOfCounts=counts;
         }
 
+        public void Write(IEnumerable<string> index)
+        {
+            indexResult=new List<string>(index);
+        }
+
         public ResultOfCounts WriteResultOfCounts => writeResultOfCounts;
+
+        public List<string> IndexResult
+        {
+            get { return indexResult; }
+        }
     }
 }
