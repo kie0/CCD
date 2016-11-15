@@ -44,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="ConsoleProvider.cs" />
+    <Compile Include="EnvironmentProvider.cs" />
+    <Compile Include="FileSystemProvider.cs" />
     <Compile Include="IConsole.cs" />
     <Compile Include="IEnvironment.cs" />
     <Compile Include="IFileSystem.cs" />
