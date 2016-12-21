@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:CCD.Nback.Views"
+                    xmlns:ViewModels="clr-namespace:CCD.Nback.ViewModels"
+                    xmlns:Views="clr-namespace:CCD.Nback.Views">
+    <DataTemplate DataType="{x:Type ViewModels:ParameterViewModel}">
+        <Views:ParameterView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type ViewModels:TestViewModel}">
+        <Views:TestView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type ViewModels:ErgebnisViewModel}">
+        <Views:ErgebnisView/>
+    </DataTemplate>
+</ResourceDictionary>

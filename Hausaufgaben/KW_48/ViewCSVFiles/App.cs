@@ -40,18 +40,19 @@ namespace ViewCSVFiles
             });
                 
         }
-
-        private int CalculateMaxPageIndex(int rowsCount, int pageLength)
-        {
-            return (rowsCount-1)/pageLength +1;   
-        }
-
         private CsvInfo ReadCsvInfo(string fileName)
         {
             var headerLine= io.ReadCsv(fileName).First();
             var rowsCount = io.ReadCsv(fileName).Count() - 1;
             return new CsvInfo() {Header = headerLine, RowsCount = rowsCount};
         }
+
+        private int CalculateMaxPageIndex(int rowsCount, int pageLength)
+        {
+            return (rowsCount-1)/pageLength +1;   
+        }
+
+
 
         private int UpdatePageIndex(string command, int pageIndex, int maxPageLength)
         {
@@ -102,25 +103,18 @@ namespace ViewCSVFiles
             return splitColumnResult;
         }
 
-
-        private void WriteFooter()
+        private int[] CalcColumnWidth(SplitColumnResult splitResult)
         {
-            console.WriteLine("N(ext page, P(revious page, F(irst page, L(ast page, eX(it");
-        }
-
-        private void WriteDataRow(IEnumerable<string[]> dataCol, int[] columnWidth)
-        {
-            foreach (var row in dataCol)
+            var unitedCols = splitResult.DataCol.Union(new[] { splitResult.HeaderCol });
+            var result = new int[splitResult.HeaderCol.Length];
+            foreach (var unitedCol in unitedCols)
             {
-                var line = "";
-                for (int i = 0; i < columnWidth.Length; i++)
+                for (int i = 0; i < unitedCol.Length; i++)
                 {
-                    var width = columnWidth[i];
-                    var cell = row[i].PadRight(width);
-                    line = line + $"{cell}|";
-                }
-                console.WriteLine(line);
+                    result[i] = Math.Max(result[i],unitedCol[i].Length);
+                }    
             }
+            return result;
         }
         private void WriteHeader(string[] headerCol, int[] columnWidth)
         {
@@ -137,20 +131,27 @@ namespace ViewCSVFiles
             console.WriteLine(header);
             console.WriteLine(underline);
         }
-
-        private int[] CalcColumnWidth(SplitColumnResult splitResult)
+        private void WriteDataRow(IEnumerable<string[]> dataCol, int[] columnWidth)
         {
-            var unitedCols = splitResult.DataCol.Union(new[] { splitResult.HeaderCol });
-            var result = new int[splitResult.HeaderCol.Length];
-            foreach (var unitedCol in unitedCols)
+            foreach (var row in dataCol)
             {
-                for (int i = 0; i < unitedCol.Length; i++)
+                var line = "";
+                for (int i = 0; i < columnWidth.Length; i++)
                 {
-                    result[i] = Math.Max(result[i],unitedCol[i].Length);
-                }    
+                    var width = columnWidth[i];
+                    var cell = row[i].PadRight(width);
+                    line = line + $"{cell}|";
+                }
+                console.WriteLine(line);
             }
-            return result;
         }
+
+        private void WriteFooter()
+        {
+            console.WriteLine("N(ext page, P(revious page, F(irst page, L(ast page, eX(it");
+        }
+
+
     }
 
     public class CsvInfo

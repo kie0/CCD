@@ -10,10 +10,10 @@ namespace ViewCSVFiles.Adapters
         public EnvironmentAdapter()
         {
             var args = Environment.GetCommandLineArgs();
-            if (args.Length > 0)
-                FileName = args[0];
+            if (args.Length > 1)
+                FileName = args[1];
             int pageSizeParsed;
-            if (args.Length > 1 && int.TryParse(args[1], out pageSizeParsed))
+            if (args.Length > 2 && int.TryParse(args[2], out pageSizeParsed))
             {
                 PageLength = pageSizeParsed;
             }
