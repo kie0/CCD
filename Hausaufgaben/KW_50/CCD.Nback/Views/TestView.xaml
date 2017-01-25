@@ -15,7 +15,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
         <Button Grid.Row="0" 
                 FontSize="80" 
                 Margin="10"
@@ -25,7 +25,7 @@
         <TextBlock Grid.Row="1"
                    TextAlignment="Center"
                    Text="{Binding TestProgress}"/>
-        
+
         <ProgressBar Grid.Row="2" Value="{Binding Progress}"/>
 
         <StackPanel Grid.Row="3"
@@ -42,6 +42,6 @@
                     Margin="10"
                     Command="{Binding Path=CancelCommand}">cancel</Button>
         </StackPanel>
-        
+
     </Grid>
 </UserControl>

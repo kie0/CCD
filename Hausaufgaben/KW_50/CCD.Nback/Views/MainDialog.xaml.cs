@@ -17,7 +17,7 @@ namespace CCD.Nback.Views
     /// <summary>
     /// Interaction logic for MainDialog.xaml
     /// </summary>
-    public partial class MainDialog : Window
+    public partial class MainDialog : Window, IUiAdapter
     {
         public MainDialog()
         {

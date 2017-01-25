@@ -14,17 +14,15 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-           <ColumnDefinition/>
+            <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Grid.Row="0" Margin="3">Hast de echt gut gemacht!</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="3">Hast Du echt gut gemacht!</TextBlock>
         <StackPanel Grid.Column="1"
                     Grid.Row="0"
                     Orientation="Horizontal">
             <TextBlock Margin="3"
-                       Text="{Binding ErgebnisWert}"/>
-            <TextBlock Margin="3" 
-                       Text="%"/>
+                       Text="{Binding ErgebnisWert,StringFormat='p'}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1"
@@ -37,6 +35,6 @@
                     Margin="10"
                     Command="{Binding Path=CloseCommand}">Beenden</Button>
         </StackPanel>
-        
+
     </Grid>
 </UserControl>

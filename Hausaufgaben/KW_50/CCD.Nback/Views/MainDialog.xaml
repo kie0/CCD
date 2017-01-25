@@ -12,7 +12,7 @@
     <Window.Resources>
         <ResourceDictionary Source="ViewModelTemplates.xaml" />
     </Window.Resources>
-    <ContentControl x:Name="contentControl"
+    <ContentControl x:Name="ContentControl"
                     Margin="5"
                     Content="{Binding DataContext, ElementName=window}"></ContentControl>
 </Window>

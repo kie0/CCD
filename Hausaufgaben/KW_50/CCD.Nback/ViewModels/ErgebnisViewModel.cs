@@ -7,17 +7,15 @@ using CCD.Nback.Helper;
 
 namespace CCD.Nback.ViewModels
 {
-    public class ErgebnisViewModel:INotifyPropertyChanged
+    public class ErgebnisViewModel : INotifyPropertyChanged
     {
-        private double ergebnisWert=0;
+        private double ergebnisWert;
 
         public ErgebnisViewModel()
         {
-            CloseCommand = new RelayCommand(() =>
-            {
-                OnClose();
-            });
+            CloseCommand = new RelayCommand(() => { OnClose(); });
         }
+
         public ICommand CloseCommand { get; set; }
 
         public double ErgebnisWert
@@ -25,8 +23,8 @@ namespace CCD.Nback.ViewModels
             get { return ergebnisWert; }
             set
             {
-                ergebnisWert = value; 
-                OnPropertyChanged(nameof(ErgebnisWert));
+                ergebnisWert = value;
+                OnPropertyChanged();
             }
         }
 

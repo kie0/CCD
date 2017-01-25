@@ -19,7 +19,7 @@ using CCD.Nback.Helper;
 
 namespace CCD.Nback.ViewModels
 {
-    public class TestViewModel: INotifyPropertyChanged
+    public class TestViewModel : INotifyPropertyChanged
     {
         private Timer timer;
         private char buchstabe;
@@ -77,7 +77,7 @@ namespace CCD.Nback.ViewModels
         /// Die zum <see cref="CancelCommand"/> zugehörige <see cref="Action"/>
         /// </summary>
         public Action OnCancel { get; set; }
-        
+
 
         public event EventHandler Finished;
 
@@ -85,24 +85,27 @@ namespace CCD.Nback.ViewModels
         {
             Finished?.Invoke(this, EventArgs.Empty);
         }
-        
+
 
         public void Initialisieren(Parameter parameter)
         {
             reizdauer = parameter.Reizdauer;
             restdauer = parameter.Reizdauer;
 
-            timer = new Timer(200);
+
+            const int interval = 200; // intervall sollte kleiner als der parameter.Reizdauer sein
+
+            timer = new Timer(interval);
             timer.Elapsed += (s, e) =>
             {
-                restdauer -= 200;
+                restdauer -= interval;
                 Progress = restdauer * 100 / reizdauer;
 
                 if (restdauer <= 0)
                 {
                     NextCommandExecute();
                 }
-                
+
             };
             timer.Start();
         }
@@ -112,7 +115,7 @@ namespace CCD.Nback.ViewModels
             if (neuerReiz != null)
             {
                 Buchstabe = neuerReiz.Buchstabe;
-                TestProgress = $"{neuerReiz.Index+1}/{neuerReiz.Total}";
+                TestProgress = $"{neuerReiz.Index + 1}/{neuerReiz.Total}";
             }
             else
             {
@@ -126,7 +129,11 @@ namespace CCD.Nback.ViewModels
         public string TestProgress
         {
             get { return testProgress; }
-            set { testProgress = value; OnPropertyChanged(nameof(TestProgress));}
+            set
+            {
+                testProgress = value;
+                OnPropertyChanged();
+            }
         }
 
         public char Buchstabe
@@ -135,7 +142,7 @@ namespace CCD.Nback.ViewModels
             set
             {
                 buchstabe = value;
-                OnPropertyChanged(nameof(Buchstabe));
+                OnPropertyChanged();
             }
         }
 
@@ -144,12 +151,12 @@ namespace CCD.Nback.ViewModels
             get { return progress; }
             set
             {
-                progress = value; 
-                OnPropertyChanged(nameof(Progress));
+                progress = value;
+                OnPropertyChanged();
             }
         }
 
-        
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -159,6 +166,6 @@ namespace CCD.Nback.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        
+
     }
 }

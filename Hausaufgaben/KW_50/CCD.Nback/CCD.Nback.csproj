@@ -56,10 +56,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Ergebnis.cs" />
+    <Compile Include="IntegrationApp.cs" />
+    <Compile Include="IProtokollAdapter.cs" />
+    <Compile Include="IReizAdapter.cs" />
+    <Compile Include="IUiAdapter.cs" />
     <Compile Include="Parameter.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ProtokollAdapter.cs" />
     <Compile Include="Reiz.cs" />
     <Compile Include="Helper\RelayCommand.cs" />
+    <Compile Include="ReizAdapter.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="ViewModels\ErgebnisViewModel.cs" />
     <Compile Include="ViewModels\ParameterViewModel.cs" />

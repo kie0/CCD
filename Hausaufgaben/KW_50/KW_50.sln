@@ -6,6 +6,11 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infos", "Infos", "{C44B8B8F-6907-48E8-AB35-A4390629BF53}"
 	ProjectSection(SolutionItems) = preProject
 		Infos\ArchitekturModelle.bmp = Infos\ArchitekturModelle.bmp
+		Infos\image1.JPG = Infos\image1.JPG
+		Infos\image2.JPG = Infos\image2.JPG
+		Infos\image3.JPG = Infos\image3.JPG
+		Infos\IMG_0053.JPG = Infos\IMG_0053.JPG
+		Infos\IMG_0054.JPG = Infos\IMG_0054.JPG
 		Infos\SoftwareZelle.bmp = Infos\SoftwareZelle.bmp
 	EndProjectSection
 EndProject

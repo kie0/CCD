@@ -1,4 +1,5 @@
 ﻿#region Header
+
 // ============================================================================================
 //   Projekt:   CCD5-2016/12/13
 //  
@@ -7,6 +8,7 @@
 //  
 //   Alle Rechte vorbehalten. All rights reserved.
 // ============================================================================================
+
 #endregion
 
 using System;
@@ -19,22 +21,20 @@ namespace CCD.Nback.ViewModels
 {
     public class ParameterViewModel : INotifyPropertyChanged
     {
-        private int reizdauer = 3000;
         private int nummer = 3;
-        private int reizeAnzahl = 10;
         private string proband = "test";
+        private int reizdauer = 3000;
+        private int reizeAnzahl = 10;
+
+        public ParameterViewModel()
+        {
+            StartCommand = new RelayCommand(
+                () => { OnStarted(new Parameter(proband, reizdauer, nummer, reizeAnzahl)); }, GetIsModelValid);
+        }
 
         public RelayCommand StartCommand { get; set; }
 
         public Action<Parameter> OnStarted { get; set; }
-
-        public ParameterViewModel()
-        {
-            StartCommand = new RelayCommand(() =>
-            {
-                OnStarted(new Parameter(proband, reizdauer, nummer, reizeAnzahl));
-            }, GetIsModelValid);
-        }
 
         public string Proband
         {
@@ -42,7 +42,7 @@ namespace CCD.Nback.ViewModels
             set
             {
                 proband = value;
-                OnPropertyChanged(nameof(Proband));
+                OnPropertyChanged();
             }
         }
 
@@ -51,8 +51,8 @@ namespace CCD.Nback.ViewModels
             get { return reizdauer; }
             set
             {
-                reizdauer = value; 
-                OnPropertyChanged(nameof(Reizdauer));
+                reizdauer = value;
+                OnPropertyChanged();
             }
         }
 
@@ -62,7 +62,7 @@ namespace CCD.Nback.ViewModels
             set
             {
                 nummer = value;
-                OnPropertyChanged(nameof(Nummer));
+                OnPropertyChanged();
             }
         }
 
@@ -72,16 +72,17 @@ namespace CCD.Nback.ViewModels
             set
             {
                 reizeAnzahl = value;
-                OnPropertyChanged(nameof(ReizeAnzahl));
+                OnPropertyChanged();
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private bool GetIsModelValid(object parameter)
         {
-            return Nummer > 0 && Nummer < 10 && Reizdauer > 0 && ReizeAnzahl > 9 && reizeAnzahl < 101 && !string.IsNullOrEmpty(Proband);
+            return Nummer > 0 && Nummer < 10 && Reizdauer > 0 && ReizeAnzahl > 9 && reizeAnzahl < 101 &&
+                   !string.IsNullOrEmpty(Proband);
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
